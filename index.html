@@ -88,6 +88,15 @@ a.jk:hover{text-decoration:underline}
 .toc a:hover{border-color:var(--accent)}
 .toc a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media print{.toc{display:none}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px;display:flex;flex-direction:column;gap:2px}
+.stat .lbl{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.stat .big{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.stat .sub{font-size:13.5px;color:var(--ink-2)}
+@media (max-width:760px){.stats{grid-template-columns:1fr}}
+table.consol td.n,table.consol th.n{text-align:center;font-variant-numeric:tabular-nums;width:64px}
+table.consol td.n{font-weight:700;font-size:16px}
+.ok-t{color:var(--ok)} .part-t{color:var(--part)} .no-t{color:var(--no)} .dec-t{color:var(--dec)}
 /* pills */
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap;line-height:1.6}
 .pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
@@ -198,6 +207,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
   td.nm{white-space:normal} td.nm .it{min-width:0}
   .key.bad{box-shadow:none}
   footer{break-inside:avoid}
+  .stats{grid-template-columns:repeat(3,1fr)} .stat{break-inside:avoid}
   .dict-intro{grid-template-columns:repeat(3,1fr)}
   .dn{break-inside:avoid}
   table.dict td.sit{white-space:normal}
@@ -234,7 +244,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
 
 <section id="onde">
   <div class="sec-head">
-    <span class="eyebrow">Em três pontos</span>
+    <span class="eyebrow">Resumo</span>
     <h2>Onde estamos</h2>
   </div>
   <div class="keys">
@@ -254,6 +264,23 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
       <p>Exportar os dados da tela (BCB026), régua do Pix para Iniciação de Pagamentos, os itens monitorados do item 2 da IN 706 (certificação, tickets, qualidade, jornada) e qualquer limiar da IN 588.</p>
     </div>
   </div>
+
+  <div class="stats">
+    <div class="stat"><span class="lbl">Gaps do catálogo BCB</span><span class="big">1 aberto</span><span class="sub">BCB023 e 024 resolvidos · BCB025 em parte · <b>BCB026 aberto</b></span></div>
+    <div class="stat"><span class="lbl">Gaps da verificação (G1 a G21)</span><span class="big">6 abertos</span><span class="sub">13 parciais · 2 fora por decisão</span></div>
+    <div class="stat"><span class="lbl">Plano no Jira (projeto EDD)</span><span class="big">40 itens</span><span class="sub">em 10 épicos · 3 bloqueiam a produção</span></div>
+  </div>
+
+  <div class="tbl"><table class="dict consol">
+    <thead><tr><th>Frente</th><th class="n">Tem</th><th class="n">Parcial</th><th class="n">Não tem</th><th class="n">Fora</th><th>O que mais pesa</th><th>Épicos</th></tr></thead>
+    <tbody>
+      <tr><td><b>IN 706</b><div class="muted" style="font-size:12.5px">Painel e itens monitorados</div></td><td class="n ok-t">5</td><td class="n part-t">7</td><td class="n no-t">2</td><td class="n dec-t">3</td><td>Exportação com filtros (BCB026) e os itens 2.2, 2.3, 2.5 e 2.6.1, que não existem</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-111">EDD-111</a> <a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-112">EDD-112</a> <a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-113">EDD-113</a> <a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-114">EDD-114</a> <a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-115">EDD-115</a></td></tr>
+      <tr><td><b>IN 615</b><div class="muted" style="font-size:12.5px">Réguas das APIs</div></td><td class="n ok-t">3</td><td class="n part-t">1</td><td class="n no-t">2</td><td class="n dec-t">1</td><td>Régua do Pix para Iniciação de Pagamentos, hoje fora das telas</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-116">EDD-116</a></td></tr>
+      <tr><td><b>IN 588</b><div class="muted" style="font-size:12.5px">Diretrizes do Portal</div></td><td class="n ok-t">2</td><td class="n part-t">3</td><td class="n no-t">3</td><td class="n dec-t">1</td><td>Portal 24×7 sem ambiente de produção e nenhum limiar da norma cadastrado</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-117">EDD-117</a> <a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-118">EDD-118</a></td></tr>
+      <tr><td><b>Transversal</b><div class="muted" style="font-size:12.5px">Vale para as três</div></td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td>Dados reais, carga diária e esteira de CI: sem eles nada conta em produção</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-119">EDD-119</a> <a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-120">EDD-120</a></td></tr>
+    </tbody></table></div>
+  <p class="small">As contagens por norma são os itens listados em <a class="xref" href="#normas">Por norma</a>. "Tem" quer dizer funcionalidade pronta no código, alimentada hoje por dados simulados. "Fora" junta o que ficou fora por decisão ou do escopo. Na IN 615, o timeout de 15 s não se aplica ao portal e não entra na conta.</p>
+
   <div class="note"><b>O que mudou desde a verificação de 25/09.</b> Três itens dados como ausentes existem: ordenação nas 8 telas de ranking, funil por instituição isolada e filtro por endpoint no ranking de instituições. Um item dado como concluído não está: ainda restam campos do semáforo retirado nos contratos. E entraram quatro achados novos: dados simulados, falta de CI e RLS, botão "Baixar CSV" sem ação e nomes errados no funil.</div>
 </section>
 
