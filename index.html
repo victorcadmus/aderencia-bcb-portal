@@ -331,7 +331,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
       <tr data-f data-norma="706"><td><b>IN 706</b><div class="muted" style="font-size:12.5px">Painel e itens monitorados</div></td><td class="n ok-t">5</td><td class="n part-t">7</td><td class="n no-t">2</td><td class="n dec-t">3</td><td>Exportação com filtros (BCB026) e os itens 2.2, 2.3, 2.5 e 2.6.1, que não existem</td></tr>
       <tr data-f data-norma="615"><td><b>IN 615</b><div class="muted" style="font-size:12.5px">Réguas das APIs</div></td><td class="n ok-t">3</td><td class="n part-t">1</td><td class="n no-t">2</td><td class="n dec-t">1</td><td>Régua do Pix para Iniciação de Pagamentos, hoje fora das telas</td></tr>
       <tr data-f data-norma="588"><td><b>IN 588</b><div class="muted" style="font-size:12.5px">Diretrizes do Portal</div></td><td class="n ok-t">2</td><td class="n part-t">3</td><td class="n no-t">3</td><td class="n dec-t">1</td><td>Portal 24×7 sem ambiente de produção e nenhum limiar da norma cadastrado</td></tr>
-      <tr data-f data-norma="tr"><td><b>Transversal</b><div class="muted" style="font-size:12.5px">Vale para as três</div></td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td>Dados reais, carga diária e esteira de CI: sem eles nada conta em produção</td></tr>
+      <tr data-f data-norma="tr"><td><b>Transversal</b><div class="muted" style="font-size:12.5px">Vale para as três</div></td><td class="n ok-t">1</td><td class="n part-t">1</td><td class="n no-t">2</td><td class="n dec-t">0</td><td>Dados reais, carga diária e esteira de CI: sem eles nada conta em produção</td></tr>
     </tbody></table></div>
   <p class="summline"><b>Gaps da verificação:</b> 6 abertos, 13 parciais e 2 fora por decisão. <b>Plano:</b> 39 itens ativos no Jira, em 10 épicos.</p>
   <p class="small">As contagens por norma são os itens listados em <a class="xref" href="#normas">Por norma</a>. "Tem" quer dizer funcionalidade pronta no código, alimentada hoje por dados simulados. "Fora" junta o que ficou fora por decisão ou do escopo. Na IN 615, o timeout de 15 s não se aplica ao portal e não entra na conta.</p>
@@ -426,7 +426,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
     <h2>O que tem e o que não tem</h2>
     <p class="muted">O significado de cada item está no <a class="xref" href="#dicionario">Dicionário das normas</a>, nos anexos.</p>
   </div>
-<div class="ftool" data-ftool><div class="fgroup" data-key="norma"><span class="flbl">Norma</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="bcb" aria-pressed="false">BCB</button><button type="button" data-v="706" aria-pressed="false">IN 706</button><button type="button" data-v="615" aria-pressed="false">IN 615</button><button type="button" data-v="588" aria-pressed="false">IN 588</button></div><div class="fgroup" data-key="status"><span class="flbl" title="Pode marcar mais de uma">Situação <small style="font-weight:400;text-transform:none;letter-spacing:0">(uma ou mais)</small></span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="tem" aria-pressed="false">Tem</button><button type="button" data-v="parcial" aria-pressed="false">Parcial</button><button type="button" data-v="falta" aria-pressed="false">Não tem</button><button type="button" data-v="fora" aria-pressed="false">Fora</button></div><span class="fcount" aria-live="polite"></span></div>
+<div class="ftool" data-ftool><div class="fgroup" data-key="norma"><span class="flbl">Norma</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="bcb" aria-pressed="false">BCB</button><button type="button" data-v="706" aria-pressed="false">IN 706</button><button type="button" data-v="615" aria-pressed="false">IN 615</button><button type="button" data-v="588" aria-pressed="false">IN 588</button><button type="button" data-v="tr" aria-pressed="false">Transversal</button></div><div class="fgroup" data-key="status"><span class="flbl" title="Pode marcar mais de uma">Situação <small style="font-weight:400;text-transform:none;letter-spacing:0">(uma ou mais)</small></span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="tem" aria-pressed="false">Tem</button><button type="button" data-v="parcial" aria-pressed="false">Parcial</button><button type="button" data-v="falta" aria-pressed="false">Não tem</button><button type="button" data-v="fora" aria-pressed="false">Fora</button></div><span class="fcount" aria-live="polite"></span></div>
   <div class="norms">
 
     <div class="norm" data-f data-norma="bcb">
@@ -525,6 +525,22 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
       </div>
     </div>
 
+    <div class="norm" data-f data-norma="tr">
+      <div class="norm-head"><h3>Transversal</h3><p>Pré-requisitos que valem para as três normas</p></div>
+      <div class="cols">
+        <div class="col" data-f data-status="tem"><span class="pill ok">Tem</span><ul>
+          <li>Indicadores com grão diário prontos no código, alimentados hoje por dados simulados</li>
+        </ul></div>
+        <div class="col" data-f data-status="parcial"><span class="pill part">Parcial</span><ul>
+          <li>Documentação do projeto: requisitos, análise regulatória e ADRs com pontos desatualizados</li>
+        </ul></div>
+        <div class="col" data-f data-status="falta"><span class="pill no">Não tem</span><ul>
+          <li><b>Dados reais</b> das instituições e carga diária automática</li>
+          <li><b>Ambiente de produção</b>, deploy e esteira de CI</li>
+        </ul></div>
+        <div class="col" data-f data-status="fora"><span class="pill dec">Fora</span><p class="muted" style="font-size:14px">Nada fora por decisão.</p></div>
+      </div>
+    </div>
   </div>
 </section>
 
