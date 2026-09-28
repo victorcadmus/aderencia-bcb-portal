@@ -113,6 +113,21 @@ table.consol td.n{font-weight:700;font-size:16px}
 .fempty-box{padding:14px 18px;border:1px dashed var(--line);border-radius:8px}
 .fhint{background:var(--part-bg);color:var(--part);border-radius:6px;padding:8px 12px;font-size:13.5px}
 @media print{.fbar{display:none}}
+
+/* filtros por bloco */
+.ftool{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.ftool.attached{border-bottom:0;border-radius:8px 8px 0 0;margin-bottom:-18px}
+.ftool.attached + .tbl{border-top-left-radius:0;border-top-right-radius:0}
+.ftool .fgroup{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.ftool .flbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-right:2px}
+.ftool button{font:inherit;font-size:12.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:2px 10px;cursor:pointer}
+.ftool button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface);font-weight:600}
+.ftool button:focus-visible,.ftool .fq:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ftool .fq{font:inherit;font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 9px;flex:1 1 160px;min-width:0;max-width:260px}
+.ftool .fcount{font-size:12.5px;color:var(--ink-3);margin-left:auto}
+.fempty td,.fempty-box{color:var(--ink-3);font-style:italic;font-size:13.5px}
+.fempty-box{padding:14px 18px;border:1px dashed var(--line);border-radius:8px}
+@media print{.ftool{display:none}}
 /* pills */
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap;line-height:1.6}
 .pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
@@ -256,16 +271,6 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
   <span>Nesta página</span>
   <a href="#onde">Onde estamos</a><a href="#normas">Por norma</a><a href="#bcb">BCB023 a 026</a><a href="#codigos-g">Os 21 gaps</a><a href="#prioridade">Por onde começar</a><a href="#jira">No Jira</a><a href="#decisoes">Decisões</a><a href="#documentacao">Documentação</a><a href="#dicionario">Dicionário</a>
 </nav>
-<div class="fbar" id="filtros" role="search" aria-label="Filtrar a página">
-  <div class="fgroup" data-key="norma"><span class="flbl">Norma</span>
-    <button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="706" aria-pressed="false">IN 706</button><button type="button" data-v="615" aria-pressed="false">IN 615</button><button type="button" data-v="588" aria-pressed="false">IN 588</button><button type="button" data-v="tr" aria-pressed="false">Transversal</button>
-  </div>
-  <div class="fgroup" data-key="status"><span class="flbl">Situação</span>
-    <button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="tem" aria-pressed="false">Tem</button><button type="button" data-v="parcial" aria-pressed="false">Parcial</button><button type="button" data-v="falta" aria-pressed="false">Não tem</button><button type="button" data-v="fora" aria-pressed="false">Fora</button>
-  </div>
-  <div class="fsearch"><label for="fq" class="flbl">Buscar</label><input id="fq" type="search" placeholder="ex.: Pix, exportação, G9, EDD-141" autocomplete="off"></div>
-  <div class="fstat"><span id="fcount" aria-live="polite"></span><button type="button" id="fclear">Limpar</button></div>
-</div>
 
 
 
@@ -311,12 +316,13 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
   <div class="note"><b>O que mudou desde a verificação de 25/09.</b> Três itens dados como ausentes existem: ordenação nas 8 telas de ranking, funil por instituição isolada e filtro por endpoint no ranking de instituições. Um item dado como concluído não está: ainda restam campos do semáforo retirado nos contratos. E entraram quatro achados novos: dados simulados, falta de CI e RLS, botão "Baixar CSV" sem ação e nomes errados no funil.</div>
 </section>
 
-<section id="normas">
+<section id="normas" data-fscope>
   <div class="sec-head">
     <span class="eyebrow">Por norma</span>
     <h2>O que tem e o que não tem</h2>
     <p class="muted">O significado de cada item está no <a class="xref" href="#dicionario">Dicionário das normas</a>, no fim da página.</p>
   </div>
+<div class="ftool" data-ftool><div class="fgroup" data-key="norma"><span class="flbl">Norma</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="706" aria-pressed="false">IN 706</button><button type="button" data-v="615" aria-pressed="false">IN 615</button><button type="button" data-v="588" aria-pressed="false">IN 588</button></div><div class="fgroup" data-key="status"><span class="flbl">Situação</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="tem" aria-pressed="false">Tem</button><button type="button" data-v="parcial" aria-pressed="false">Parcial</button><button type="button" data-v="falta" aria-pressed="false">Não tem</button><button type="button" data-v="fora" aria-pressed="false">Fora</button></div><span class="fcount" aria-live="polite"></span></div>
   <div class="norms">
 
     <div class="norm" data-f data-norma="706">
@@ -419,12 +425,13 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
   </div>
 </section>
 
-<section id="codigos-g">
+<section id="codigos-g" data-fscope>
   <div class="sec-head">
     <span class="eyebrow">Gaps encontrados</span>
     <h2>Os 21 gaps, um a um</h2>
     <p class="muted">A verificação técnica numerou cada lacuna de G1 a G21. Esses códigos são usados no resto da página e nas issues do Jira. A última coluna aponta a issue que trata cada gap no projeto EDD.</p>
   </div>
+  <div class="ftool attached" data-ftool><div class="fgroup" data-key="norma"><span class="flbl">Norma</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="706" aria-pressed="false">IN 706</button><button type="button" data-v="615" aria-pressed="false">IN 615</button><button type="button" data-v="588" aria-pressed="false">IN 588</button></div><div class="fgroup" data-key="status"><span class="flbl">Situação</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="parcial" aria-pressed="false">Parcial</button><button type="button" data-v="falta" aria-pressed="false">Não tem</button><button type="button" data-v="fora" aria-pressed="false">Fora</button></div><input type="search" class="fq" placeholder="Buscar" aria-label="Buscar nesta lista" autocomplete="off"><span class="fcount" aria-live="polite"></span></div>
   <div class="tbl"><table class="dict">
     <thead><tr><th>Código</th><th>Do que se trata</th><th>Norma</th><th>Situação</th><th>Jira</th></tr></thead>
     <tbody>
@@ -452,13 +459,14 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
     </tbody></table></div>
 </section>
 
-<section id="prioridade">
+<section id="prioridade" data-fscope>
   <div class="sec-head">
     <span class="eyebrow">Prioridade</span>
     <h2>Por onde começar</h2>
     <p class="muted">A prioridade é uma sugestão para discussão. Os códigos G da coluna "Ref." estão explicados em <a class="xref" href="#codigos-g">Os 21 gaps</a>. A coluna "Norma" indica a instrução e o item de origem de cada gap (veja o <a class="xref" href="#dicionario">Dicionário das normas</a>). A coluna "Depende de" separa o que o time resolve sozinho do que precisa de definição externa.</p>
     <div class="normsum"><span><span class="in in706">IN 706</span> 15 gaps</span><span><span class="in in615">IN 615</span> 2 gaps</span><span><span class="in in588">IN 588</span> 5 gaps</span></div>
   </div>
+  <div class="ftool attached" data-ftool><div class="fgroup" data-key="norma"><span class="flbl">Norma</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="706" aria-pressed="false">IN 706</button><button type="button" data-v="615" aria-pressed="false">IN 615</button><button type="button" data-v="588" aria-pressed="false">IN 588</button><button type="button" data-v="tr" aria-pressed="false">Transversal</button></div><div class="fgroup" data-key="status"><span class="flbl">Situação</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="parcial" aria-pressed="false">Parcial</button><button type="button" data-v="falta" aria-pressed="false">Não tem</button><button type="button" data-v="fora" aria-pressed="false">Fora</button></div><input type="search" class="fq" placeholder="Buscar" aria-label="Buscar nesta lista" autocomplete="off"><span class="fcount" aria-live="polite"></span></div>
   <div class="tbl">
     <table>
       <thead><tr><th>Gap</th><th>Norma</th><th>Impacto para o negócio</th><th>Depende de</th><th>Ref.</th><th>Jira</th></tr></thead>
@@ -497,12 +505,13 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
   </div>
 </section>
 
-<section id="jira">
+<section id="jira" data-fscope>
   <div class="sec-head">
     <span class="eyebrow">Acompanhamento</span>
     <h2>O que falta, no Jira</h2>
     <p class="muted">Tudo o que falta nesta página virou issue no projeto EDD (Squad Ecossistema de Dados): 10 épicos, separados por norma e por gap BCB, e 40 itens. Cada gap e cada decisão desta página mostra a issue que o trata.</p>
   </div>
+  <div class="ftool attached" data-ftool><div class="fgroup" data-key="norma"><span class="flbl">Norma</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="706" aria-pressed="false">IN 706</button><button type="button" data-v="615" aria-pressed="false">IN 615</button><button type="button" data-v="588" aria-pressed="false">IN 588</button><button type="button" data-v="tr" aria-pressed="false">Transversal</button></div><span class="fcount" aria-live="polite"></span></div>
   <div class="tbl"><table class="dict">
     <thead><tr><th>Grupo</th><th>Épico</th><th>Chave</th><th>Itens</th></tr></thead>
     <tbody><tr data-f data-norma="706"><td class="muted" style="font-size:13px">Gaps BCB</td><td>BCB024 · Funil de conversão correto e completo</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-111">EDD-111</a></td><td class="muted" style="font-size:13px">EDD-121, 122</td></tr><tr data-f data-norma="706"><td class="muted" style="font-size:13px">Gaps BCB</td><td>BCB025 · Comparação com o mínimo exigido</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-112">EDD-112</a></td><td class="muted" style="font-size:13px">EDD-123, 124</td></tr><tr data-f data-norma="706"><td class="muted" style="font-size:13px">Gaps BCB</td><td>BCB026 · Exportação e pesquisa customizada</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-113">EDD-113</a></td><td class="muted" style="font-size:13px">EDD-125 a 128</td></tr><tr data-f data-norma="706"><td class="muted" style="font-size:13px">IN 706</td><td>IN 706 4.1 · Painel de indicadores</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-114">EDD-114</a></td><td class="muted" style="font-size:13px">EDD-129 a 136</td></tr><tr data-f data-norma="706"><td class="muted" style="font-size:13px">IN 706</td><td>IN 706 2 e 4.2 · Itens monitorados e divulgação</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-115">EDD-115</a></td><td class="muted" style="font-size:13px">EDD-137 a 140</td></tr><tr data-f data-norma="615"><td class="muted" style="font-size:13px">IN 615</td><td>IN 615 · Réguas de desempenho e disponibilidade das APIs</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-116">EDD-116</a></td><td class="muted" style="font-size:13px">EDD-141 a 143</td></tr><tr data-f data-norma="588"><td class="muted" style="font-size:13px">IN 588</td><td>IN 588 5 · Diretrizes e SLA do Portal</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-117">EDD-117</a></td><td class="muted" style="font-size:13px">EDD-144 a 147 e 160</td></tr><tr data-f data-norma="588"><td class="muted" style="font-size:13px">IN 588</td><td>IN 588 2, 3 e 6 · Diretório e serviços centrais</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-118">EDD-118</a></td><td class="muted" style="font-size:13px">EDD-148 a 151</td></tr><tr data-f data-norma="tr"><td class="muted" style="font-size:13px">Transversal</td><td>Dados reais e base de produção</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-119">EDD-119</a></td><td class="muted" style="font-size:13px">EDD-152 a 156</td></tr><tr data-f data-norma="tr"><td class="muted" style="font-size:13px">Transversal</td><td>Documentação e rastreabilidade</td><td class="sit"><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-120">EDD-120</a></td><td class="muted" style="font-size:13px">EDD-157 a 159</td></tr></tbody></table></div>
@@ -510,11 +519,12 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
   <div class="note"><b>O que ainda não está no Jira.</b> A iniciativa e os dois planos de risco (dados simulados; divulgação de desconformidades) ficaram de fora por escolha. Também não têm issue: a decisão sobre divulgar desconformidades (IN 706 4.2), a versão do Manual de APIs e o ranking por endpoint (G20), que contraria o ADR-0017. Os épicos estão sem data limite e sem responsável.</div>
 </section>
 
-<section id="decisoes">
+<section id="decisoes" data-fscope>
   <div class="sec-head">
     <span class="eyebrow">Para decidir</span>
     <h2>Decisões que precisam de produto</h2>
   </div>
+  <div class="ftool" data-ftool><div class="fgroup" data-key="norma"><span class="flbl">Norma</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="706" aria-pressed="false">IN 706</button><button type="button" data-v="615" aria-pressed="false">IN 615</button><button type="button" data-v="588" aria-pressed="false">IN 588</button><button type="button" data-v="tr" aria-pressed="false">Transversal</button></div><span class="fcount" aria-live="polite"></span></div>
   <div class="decisions">
     <div class="dq" data-f data-norma="706"><span class="q">Seguimos sem divulgar desconformidades por instituição?</span><p>A IN 706 4.2 pede. Foi retirado por decisão; manter exige sustentar a decisão perante o regulador.</p><span class="src">ADR-0030 · sem issue no Jira</span></div>
     <div class="dq" data-f data-norma="706"><span class="q">De onde vem o catálogo BCB023 a BCB026?</span><p>Não se sabe se é do regulador ou interno. Isso muda o peso de cada gap.</p><span class="src">requirements.md · Jira: </span><a class="jk" href="https://openfinancebrasil.atlassian.net/browse/EDD-159">EDD-159</a><span></span></div>
@@ -553,7 +563,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
   </div>
 </section>
 
-<section id="dicionario">
+<section id="dicionario" data-fscope>
   <div class="sec-head">
     <span class="eyebrow">Anexo · referência</span>
     <h2>Dicionário das normas</h2>
@@ -565,6 +575,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
     <div class="dn"><span class="in in588">IN 588</span><p class="t">Manual de Serviços da Estrutura de Governança v4.0</p><p>Diz <b>como o próprio Portal e os serviços centrais</b> devem funcionar: Diretório, Service Desk, Sandbox, acessibilidade, segurança e SLA.</p></div>
   </div>
   <div class="note"><b>Cuidado com números repetidos.</b> O mesmo número trata de coisas diferentes em cada norma: o item 5.1.2 é HTTP 529 na IN 615 e linguagem do Portal na IN 588; o item 2.3 é atendimento de tickets na IN 706 e consultas ao Diretório na IN 588. Por isso, cite sempre a norma junto do número.</div>
+<div class="ftool" data-ftool><div class="fgroup" data-key="norma"><span class="flbl">Norma</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="706" aria-pressed="false">IN 706</button><button type="button" data-v="615" aria-pressed="false">IN 615</button><button type="button" data-v="588" aria-pressed="false">IN 588</button></div><div class="fgroup" data-key="status"><span class="flbl">Situação</span><button type="button" data-v="" aria-pressed="true">Todas</button><button type="button" data-v="tem" aria-pressed="false">Tem</button><button type="button" data-v="parcial" aria-pressed="false">Parcial</button><button type="button" data-v="falta" aria-pressed="false">Não tem</button><button type="button" data-v="fora" aria-pressed="false">Fora</button></div><input type="search" class="fq" placeholder="Buscar" aria-label="Buscar nesta lista" autocomplete="off"><span class="fcount" aria-live="polite"></span></div>
+<div data-fblock style="display:flex;flex-direction:column;gap:12px">
   <h3>IN BCB 706 · Manual de Monitoramento</h3>
   <div class="tbl"><table class="dict">
       <thead><tr><th>Item</th><th>O que exige</th><th>Situação no portal</th></tr></thead>
@@ -588,6 +600,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
 <tr data-f data-norma="706" data-status="parcial"><td class="par">4.1 · Índice</td><td><div class="t">Índice de performance mensal</div><div class="d">Nota por instituição, divulgada mensalmente. A fórmula é da Estrutura de Governança, não da norma.</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="gref">G15</span></td></tr>
 <tr data-f data-norma="706" data-status="fora parcial"><td class="par">4.2</td><td><div class="t">Divulgação dos itens monitorados</div><div class="d">Divulgar por instituição, nominalmente e com histórico, incluindo as desconformidades.</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="pill dec">Desconformidades</span> <span class="gref">G18</span></td></tr>
       </tbody></table></div>
+</div>
+<div data-fblock style="display:flex;flex-direction:column;gap:12px">
   <h3>IN BCB 615 · Manual de APIs</h3>
   <div class="tbl"><table class="dict">
       <thead><tr><th>Item</th><th>O que exige</th><th>Situação no portal</th></tr></thead>
@@ -599,6 +613,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
 <tr data-f data-norma="615" data-status="falta tem"><td class="par">5.4.2</td><td><div class="t">Disponibilidade mínima</div><div class="d">Diária ≥ 95% e longa (média de 90 dias) ≥ 99,5%. Iniciação de Pagamentos segue as regras do Pix.</div></td><td class="sit"><span class="pill ok">Régua geral</span> <span class="pill no">Pix</span> <span class="gref">G9</span></td></tr>
 <tr data-f data-norma="615" data-status="fora"><td class="par">5.5</td><td><div class="t">Timeout</div><div class="d">15 segundos para provedor e consumidor; acima disso, HTTP 504.</div></td><td class="sit"><span class="pill dec">Não se aplica</span></td></tr>
       </tbody></table></div>
+</div>
+<div data-fblock style="display:flex;flex-direction:column;gap:12px">
   <h3>IN BCB 588 · Manual de Serviços</h3>
   <div class="tbl"><table class="dict">
       <thead><tr><th>Item</th><th>O que exige</th><th>Situação no portal</th></tr></thead>
@@ -614,88 +630,83 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
 <tr data-f data-norma="588" data-status="falta"><td class="par">5.5</td><td><div class="t">SLA do Portal</div><div class="d">24×7; 90% de disponibilidade a cada 24 h e 99,5% a cada 3 meses.</div></td><td class="sit"><span class="pill no">Sem produção</span> <span class="gref">G17</span></td></tr>
 <tr data-f data-norma="588" data-status="falta"><td class="par">6.1</td><td><div class="t">SLA do Sandbox</div><div class="d">95% das 8h às 20h em dias úteis; 80% nos demais horários.</div></td><td class="sit"><span class="pill no">Sem limiar</span></td></tr>
       </tbody></table></div>
+</div>
 
   <p class="small">Fonte: análise regulatória do projeto (paof-architecture/docs/regulatory-analysis.md) e verificação técnica v2. O texto oficial das INs não foi relido nesta verificação. A IN BCB 637 (Manual de Experiência do Cliente) é a origem do critério de jornada do item 2.6.1 e não aparece nos demais documentos do projeto.</p>
 </section>
 
+
+
 <script>
 (function(){
-  var state={norma:'',status:'',q:''};
   var norm=function(t){return (t||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');};
-  var items=[].slice.call(document.querySelectorAll('[data-f]'));
-  items.forEach(function(el){el._t=norm(el.textContent);});
-  function match(el){
-    var n=el.dataset.norma, s=el.dataset.status;
-    if(state.norma && n!==undefined && n.split(' ').indexOf(state.norma)<0) return false;
-    if(state.status && s!==undefined && s.split(' ').indexOf(state.status)<0) return false;
-    if(state.q && el._t.indexOf(state.q)<0) return false;
-    return true;
-  }
-  function empty(container,show,cols){
-    var e=container.querySelector(':scope > .fempty, :scope > .fempty-box');
-    if(!e){
-      if(container.tagName==='TBODY'){e=document.createElement('tr');e.className='fempty';var td=document.createElement('td');td.colSpan=cols||1;td.textContent='Nenhum item corresponde aos filtros.';e.appendChild(td);}
-      else{e=document.createElement('div');e.className='fempty-box';e.textContent='Nenhum item corresponde aos filtros.';}
-      container.appendChild(e);
+  document.querySelectorAll('[data-fscope]').forEach(function(scope){
+    var tool=scope.querySelector('[data-ftool]'); if(!tool) return;
+    var st={norma:'',status:'',q:''};
+    var items=[].slice.call(scope.querySelectorAll('[data-f]'));
+    items.forEach(function(el){el._t=norm(el.textContent);});
+    function ok(el,useNorma){
+      var n=el.dataset.norma,s=el.dataset.status;
+      if(useNorma!==false&&st.norma&&n!==undefined&&n.split(' ').indexOf(st.norma)<0) return false;
+      if(st.status&&s!==undefined&&s.split(' ').indexOf(st.status)<0) return false;
+      if(st.q&&el._t.indexOf(st.q)<0) return false;
+      return true;
     }
-    e.hidden=!show;
-  }
-  function apply(){
-    var shown=0,total=0;
-    // colunas dentro de cada norma
-    document.querySelectorAll('.norm[data-f]').forEach(function(nb){
-      var n=nb.dataset.norma.split(' ');
-      var normOk=!state.norma||n.indexOf(state.norma)>=0;
-      var any=false;
-      nb.querySelectorAll('.col[data-f]').forEach(function(c){var ok=normOk&&match(c);c.hidden=!ok;if(ok)any=true;});
-      nb.hidden=!any;
-    });
-    items.forEach(function(el){
-      if(el.classList.contains('norm')||el.classList.contains('col')) return;
-      var ok=match(el); el.hidden=!ok;
-    });
-    items.forEach(function(el){if(el.classList.contains('norm'))return; total++; if(!el.hidden&&!(el.closest('.norm[hidden]')))shown++;});
-    // cabeçalhos de grupo da tabela de prioridades
-    document.querySelectorAll('tr.prio-row').forEach(function(h){
-      var r=h.nextElementSibling,any=false;
-      while(r&&!r.classList.contains('prio-row')){if(r.hasAttribute('data-f')&&!r.hidden)any=true;r=r.nextElementSibling;}
-      h.hidden=!any;
-    });
-    // estado vazio por contêiner
-    document.querySelectorAll('tbody').forEach(function(tb){
-      var rows=tb.querySelectorAll(':scope > tr[data-f]'); if(!rows.length) return;
-      var vis=[].some.call(rows,function(r){return !r.hidden;});
-      var cols=tb.closest('table').querySelectorAll('thead th').length;
-      empty(tb,!vis,cols);
-    });
-    ['.norms','.decisions'].forEach(function(sel){
-      document.querySelectorAll(sel).forEach(function(c){
-        var kids=c.querySelectorAll(':scope > [data-f]'); if(!kids.length) return;
-        empty(c,![].some.call(kids,function(k){return !k.hidden;}));
+    function empty(c,show,cols){
+      var e=c.querySelector(':scope > .fempty, :scope > .fempty-box');
+      if(!e){
+        if(c.tagName==='TBODY'){e=document.createElement('tr');e.className='fempty';var td=document.createElement('td');td.colSpan=cols||1;td.textContent='Nenhum item corresponde ao filtro.';e.appendChild(td);}
+        else{e=document.createElement('div');e.className='fempty-box';e.textContent='Nenhum item corresponde ao filtro.';}
+        c.appendChild(e);
+      }
+      e.hidden=!show;
+    }
+    function apply(){
+      var shown=0,total=0;
+      scope.querySelectorAll('.norm[data-f]').forEach(function(nb){
+        var nOk=!st.norma||nb.dataset.norma.split(' ').indexOf(st.norma)>=0,any=false;
+        nb.querySelectorAll('.col[data-f]').forEach(function(c){var v=nOk&&ok(c,false);c.hidden=!v;total++;if(v){any=true;shown++;}});
+        nb.hidden=!any;
+      });
+      items.forEach(function(el){
+        if(el.classList.contains('norm')||el.classList.contains('col')) return;
+        var v=ok(el); el.hidden=!v; total++; if(v) shown++;
+      });
+      scope.querySelectorAll('tr.prio-row').forEach(function(h){
+        var r=h.nextElementSibling,any=false;
+        while(r&&!r.classList.contains('prio-row')){if(r.hasAttribute('data-f')&&!r.hidden)any=true;r=r.nextElementSibling;}
+        h.hidden=!any;
+      });
+      scope.querySelectorAll('[data-fblock]').forEach(function(b){
+        b.hidden=![].some.call(b.querySelectorAll('[data-f]'),function(r){return !r.hidden;});
+      });
+      scope.querySelectorAll('tbody').forEach(function(tb){
+        var rows=tb.querySelectorAll(':scope > tr[data-f]'); if(!rows.length) return;
+        if(tb.closest('[data-fblock]')) return;
+        empty(tb,![].some.call(rows,function(r){return !r.hidden;}),tb.closest('table').querySelectorAll('thead th').length);
+      });
+      scope.querySelectorAll('.norms,.decisions').forEach(function(c){
+        var k=c.querySelectorAll(':scope > [data-f]'); if(!k.length) return;
+        empty(c,![].some.call(k,function(x){return !x.hidden;}));
+      });
+      var anyB=scope.querySelectorAll('[data-fblock]');
+      if(anyB.length){var host=anyB[anyB.length-1].parentNode;var vis=[].some.call(anyB,function(b){return !b.hidden;});var e=scope.querySelector('.fempty-box.blk');if(!e){e=document.createElement('div');e.className='fempty-box blk';e.textContent='Nenhum item corresponde ao filtro.';anyB[anyB.length-1].after(e);}e.hidden=vis;}
+      var active=st.norma||st.status||st.q;
+      tool.querySelector('.fcount').textContent=active?(shown+' de '+total):(total+' itens');
+    }
+    tool.querySelectorAll('.fgroup').forEach(function(g){
+      g.addEventListener('click',function(e){
+        var b=e.target.closest('button'); if(!b) return;
+        g.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+        st[g.dataset.key]=b.dataset.v; apply();
       });
     });
-    var active=state.norma||state.status||state.q;
-    document.getElementById('fcount').textContent=active?('Mostrando '+shown+' de '+total+' itens'):(total+' itens');
-    document.getElementById('fclear').hidden=!active;
-  }
-  document.querySelectorAll('.fgroup').forEach(function(g){
-    g.addEventListener('click',function(e){
-      var b=e.target.closest('button'); if(!b) return;
-      g.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
-      state[g.dataset.key]=b.dataset.v; apply();
-    });
-  });
-  var q=document.getElementById('fq');
-  q.addEventListener('input',function(){state.q=norm(q.value.trim());apply();});
-  document.getElementById('fclear').addEventListener('click',function(){
-    state={norma:'',status:'',q:''}; q.value='';
-    document.querySelectorAll('.fgroup').forEach(function(g){g.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.v===''?'true':'false');});});
+    var q=tool.querySelector('.fq');
+    if(q) q.addEventListener('input',function(){st.q=norm(q.value.trim());apply();});
     apply();
   });
-  apply();
 })();
 </script>
-
 <footer>
   <span>Fonte: Aderência do Portal de Dados às normas do BCB — verificação v2 (28/09/2026), sobre a verificação v1 (25/09/2026).</span>
   <span>As ações que saem desta verificação estão no documento Plano de ação BCBs.</span>
