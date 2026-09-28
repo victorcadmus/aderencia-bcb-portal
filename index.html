@@ -65,6 +65,20 @@ header{display:flex;flex-direction:column;gap:14px;padding-bottom:28px;border-bo
 .key.bad{border-color:var(--no);box-shadow:inset 0 0 0 1px var(--no)}
 @media (max-width:820px){.keys{grid-template-columns:1fr}}
 
+
+/* dicionário */
+.dict-intro{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.dn{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.dn .t{font-weight:600}
+.dn p{font-size:14px;color:var(--ink-2)} .dn p.t{color:var(--ink)}
+@media (max-width:760px){.dict-intro{grid-template-columns:1fr}}
+#dicionario h3{margin-top:10px}
+table.dict td.par{font-family:var(--mono);font-size:13px;white-space:nowrap;color:var(--ink);font-weight:500}
+table.dict td.sit{white-space:nowrap}
+table.dict td.sit .pill{margin:0 4px 4px 0}
+.gref{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+a.xref{color:var(--accent);text-underline-offset:2px}
+
 /* pills */
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap;line-height:1.6}
 .pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
@@ -175,6 +189,9 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
   td.nm{white-space:normal} td.nm .it{min-width:0}
   .key.bad{box-shadow:none}
   footer{break-inside:avoid}
+  .dict-intro{grid-template-columns:repeat(3,1fr)}
+  .dn{break-inside:avoid}
+  table.dict td.sit{white-space:normal}
 }
 </style>
 </head>
@@ -284,6 +301,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
   <div class="sec-head">
     <span class="eyebrow">Por norma</span>
     <h2>O que tem e o que não tem</h2>
+    <p class="muted">O significado de cada parágrafo está no <a class="xref" href="#dicionario">Dicionário das normas</a>, no fim da página.</p>
   </div>
   <div class="norms">
 
@@ -355,7 +373,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
           <li>Diretório: retrato fixo de 03/08/2026, sem atualização</li>
         </ul></div>
         <div class="col"><span class="pill no">Não tem</span><ul>
-          <li><b>Nenhum limiar</b> da IN 588 cadastrado: 95%/90% em 24 h, 99,5% em 3 meses e P95 ≤ 1.500 ms para Diretório e Service Desk; 95%/80% para o Sandbox</li>
+          <li><b>Nenhum limiar</b> da IN 588 cadastrado: Diretório e Service Desk (95% em 24 h, 99,5% em 3 meses, P95 ≤ 1.500 ms), Portal (90% em 24 h, 99,5% em 3 meses) e Sandbox (95% em horário útil, 80% nos demais)</li>
           <li>Resultados de testes de conformidade em área pública</li>
           <li>SLA 24×7 do portal (não há produção)</li>
         </ul></div>
@@ -372,7 +390,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
   <div class="sec-head">
     <span class="eyebrow">Gaps encontrados</span>
     <h2>Proposta de prioridade</h2>
-    <p class="muted">A prioridade é uma sugestão para discussão. A coluna "Norma" indica a instrução e o item de origem de cada gap. A coluna "Depende de" separa o que o time resolve sozinho do que precisa de definição externa.</p>
+    <p class="muted">A prioridade é uma sugestão para discussão. A coluna "Norma" indica a instrução e o item de origem de cada gap (veja o <a class="xref" href="#dicionario">Dicionário das normas</a>). A coluna "Depende de" separa o que o time resolve sozinho do que precisa de definição externa.</p>
     <div class="normsum"><span><span class="in in706">IN 706</span> 15 gaps</span><span><span class="in in615">IN 615</span> 2 gaps</span><span><span class="in in588">IN 588</span> 5 gaps</span></div>
   </div>
   <div class="tbl">
@@ -429,6 +447,70 @@ footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:va
     <div class="dq"><span class="q">21 ou 22 serviços na Infraestrutura compartilhada?</span><p>A dúvida está registrada no próprio cadastro.</p><span class="src">seed/035</span></div>
     <div class="dq"><span class="q">Qual versão do Manual de APIs vale?</span><p>A versão "7.0" segue como pergunta aberta.</p><span class="src">seed/058</span></div>
   </div>
+</section>
+
+<section id="dicionario">
+  <div class="sec-head">
+    <span class="eyebrow">Referência</span>
+    <h2>Dicionário das normas</h2>
+    <p class="muted">O que cada parágrafo citado nesta página exige, e como o portal está em relação a ele. Os códigos G remetem à tabela de gaps.</p>
+  </div>
+  <div class="dict-intro">
+    <div class="dn"><span class="in in706">IN 706</span><p class="t">Manual de Monitoramento v3.0</p><p>Diz <b>o que divulgar</b>: os itens monitorados (§2), o painel de indicadores (§4.1) e a divulgação por instituição (§4.2). Vigente desde 29/01/2026.</p></div>
+    <div class="dn"><span class="in in615">IN 615</span><p class="t">Manual de APIs v7.0</p><p>Diz <b>quais são os limites</b> das APIs das instituições: tempo de resposta, disponibilidade, HTTP 529 e timeout. Vigente desde 06/05/2025.</p></div>
+    <div class="dn"><span class="in in588">IN 588</span><p class="t">Manual de Serviços da Estrutura de Governança v4.0</p><p>Diz <b>como o próprio Portal e os serviços centrais</b> devem funcionar: Diretório, Service Desk, Sandbox, acessibilidade, segurança e SLA.</p></div>
+  </div>
+  <div class="note"><b>Cuidado com números repetidos.</b> O mesmo parágrafo trata de coisas diferentes em cada norma: o §5.1.2 é HTTP 529 na IN 615 e linguagem do Portal na IN 588; o §2.3 é atendimento de tickets na IN 706 e consultas ao Diretório na IN 588. Por isso, cite sempre a norma junto do parágrafo.</div>
+  <h3>IN BCB 706 · Manual de Monitoramento</h3>
+  <div class="tbl"><table class="dict">
+      <thead><tr><th>Parágrafo</th><th>O que exige</th><th>Situação no portal</th></tr></thead>
+      <tbody>
+<tr><td class="par">§2</td><td><div class="t">Itens monitorados</div><div class="d">Lista dos seis itens que a Estrutura de Governança acompanha. Pode ser ampliada sem mudar a norma.</div></td><td class="sit"></td></tr>
+<tr><td class="par">§2.2</td><td><div class="t">Especificações, cadastros, certificação e publicação de APIs</div><div class="d">Acompanhar se as APIs estão especificadas, cadastradas, certificadas e publicadas.</div></td><td class="sit"><span class="pill no">Não tem</span> <span class="gref">G19</span></td></tr>
+<tr><td class="par">§2.3</td><td><div class="t">Atendimento de tickets</div><div class="d">80% dos tickets no prazo e nenhum acima de 2× o prazo.</div></td><td class="sit"><span class="pill no">Não tem</span> <span class="gref">G19</span></td></tr>
+<tr><td class="par">§2.4</td><td><div class="t">Reporte de informações (PCM)</div><div class="d">95% reportado até 8h do dia seguinte e 99% em 7 dias. UNPAIRED ≤ 5% por API e UNPAIRED + INCONSISTENT ≤ 1%.</div></td><td class="sit"><span class="pill ok">Metas de prazo</span> <span class="pill dec">UNPAIRED</span></td></tr>
+<tr><td class="par">§2.5</td><td><div class="t">Qualidade de dados</div><div class="d">Completude, consistência, conformidade, validade, atualidade e unicidade. Índice ≥ 95%.</div></td><td class="sit"><span class="pill no">Não tem</span> <span class="gref">G19</span></td></tr>
+<tr><td class="par">§2.6.1</td><td><div class="t">Jornada do cliente</div><div class="d">Experiência do cliente ao longo da jornada. O critério vem da IN BCB 637 (Manual de Experiência do Cliente).</div></td><td class="sit"><span class="pill no">Não tem</span> <span class="gref">G19</span></td></tr>
+<tr><td class="par">§2.6.2</td><td><div class="t">Taxa mínima de conversão</div><div class="d">Cada instituição deve ter conversão ≥ 80% da média ponderada das 3 maiores, com tolerância de 3 p.p.</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="gref">G16</span></td></tr>
+<tr><td class="par">§4.1 I</td><td><div class="t">Chamadas por API e endpoint</div><div class="d">Quantidade de chamadas por API e por endpoint, com histórico.</div></td><td class="sit"><span class="pill ok">Entregue</span> <span class="gref">G20</span></td></tr>
+<tr><td class="par">§4.1 II</td><td><div class="t">Disponibilidade por endpoint</div><div class="d">Disponibilidade das APIs por endpoint, com histórico.</div></td><td class="sit"><span class="pill ok">Entregue</span></td></tr>
+<tr><td class="par">§4.1 III</td><td><div class="t">Sucesso e erros</div><div class="d">Percentual de sucesso das chamadas e erros por código de status.</div></td><td class="sit"><span class="pill ok">Entregue</span></td></tr>
+<tr><td class="par">§4.1 IV</td><td><div class="t">Consentimentos ativos</div><div class="d">Total e por clientes únicos, PF e PJ, por transmissor/detentor e receptor/iniciador, com histórico.</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="gref">G14</span></td></tr>
+<tr><td class="par">§4.1 V</td><td><div class="t">Conversão do consentimento</div><div class="d">Taxa de conversão com detalhe de cada etapa, por transmissor/detentor e receptor/iniciador.</div></td><td class="sit"><span class="pill ok">Entregue</span> <span class="gref">G13</span></td></tr>
+<tr><td class="par">§4.1 · Nível I</td><td><div class="t">Visão consolidada</div><div class="d">Médias dos principais indicadores, com destaque para os melhores e piores do mês.</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="gref">G4</span></td></tr>
+<tr><td class="par">§4.1 · Nível II</td><td><div class="t">Visão customizada e comparativa</div><div class="d">Ordenação crescente e decrescente, busca e seleção de vários parâmetros (instituição, endpoint, período).</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="gref">G2 · G3</span></td></tr>
+<tr><td class="par">§4.1 · Exportação</td><td><div class="t">Pesquisa customizada e download</div><div class="d">Selecionar campos, inclusive dados individualizados, e baixar em diferentes formatos respeitando a seleção.</div></td><td class="sit"><span class="pill no">Não entregue</span> <span class="gref">G1</span></td></tr>
+<tr><td class="par">§4.1 · Definições</td><td><div class="t">Métricas e base de cálculo</div><div class="d">Métricas, unidades, definições, limitações, exclusões e alterações da base de cálculo explicadas com clareza.</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="gref">G5 · G6</span></td></tr>
+<tr><td class="par">§4.1 · Índice</td><td><div class="t">Índice de performance mensal</div><div class="d">Nota por instituição, divulgada mensalmente. A fórmula é da Estrutura de Governança, não da norma.</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="gref">G15</span></td></tr>
+<tr><td class="par">§4.2</td><td><div class="t">Divulgação dos itens monitorados</div><div class="d">Divulgar por instituição, nominalmente e com histórico, incluindo as desconformidades.</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="pill dec">Desconformidades</span> <span class="gref">G18</span></td></tr>
+      </tbody></table></div>
+  <h3>IN BCB 615 · Manual de APIs</h3>
+  <div class="tbl"><table class="dict">
+      <thead><tr><th>Parágrafo</th><th>O que exige</th><th>Situação no portal</th></tr></thead>
+      <tbody>
+<tr><td class="par">§5.1.2</td><td><div class="t">HTTP 529 (excesso de tráfego)</div><div class="d">Infraestrutura mínima de 300 TPS. Respostas 529 abaixo de 0,5% das requisições válidas por dia. Tolerância mensal: ≥ 90% dos dias; nos demais, ≤ 5%.</div></td><td class="sit"><span class="pill ok">Limite diário</span> <span class="pill dec">Tolerância mensal</span></td></tr>
+<tr><td class="par">§5.3.2</td><td><div class="t">Tempo de resposta (P95 diário)</div><div class="d">Por classe de frequência do endpoint: 1.500 ms (alta e média-alta), 2.000 ms (média), 4.000 ms (baixa).</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="gref">G10</span></td></tr>
+<tr><td class="par">§5.3.3</td><td><div class="t">Tolerância mensal de desempenho</div><div class="d">P95 dentro do limite em ≥ 90% dos dias do mês; nos demais, até 1,2× o limite.</div></td><td class="sit"><span class="pill dec">Por decisão</span></td></tr>
+<tr><td class="par">§5.4.1</td><td><div class="t">Cálculo da disponibilidade</div><div class="d">Medida em janelas de 1 minuto; janela abaixo de 95% conta como indisponível. A diária e a longa derivam dessas janelas.</div></td><td class="sit"><span class="pill no">Não tem</span></td></tr>
+<tr><td class="par">§5.4.2</td><td><div class="t">Disponibilidade mínima</div><div class="d">Diária ≥ 95% e longa (média de 90 dias) ≥ 99,5%. Iniciação de Pagamentos segue as regras do Pix.</div></td><td class="sit"><span class="pill ok">Régua geral</span> <span class="pill no">Pix</span> <span class="gref">G9</span></td></tr>
+<tr><td class="par">§5.5</td><td><div class="t">Timeout</div><div class="d">15 segundos para provedor e consumidor; acima disso, HTTP 504.</div></td><td class="sit"><span class="pill dec">Não se aplica</span></td></tr>
+      </tbody></table></div>
+  <h3>IN BCB 588 · Manual de Serviços</h3>
+  <div class="tbl"><table class="dict">
+      <thead><tr><th>Parágrafo</th><th>O que exige</th><th>Situação no portal</th></tr></thead>
+      <tbody>
+<tr><td class="par">§2.3</td><td><div class="t">Consultas ao Diretório</div><div class="d">Permitir descobrir quais instituições implementam cada API ou endpoint, e quais APIs cada instituição implementa.</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="gref">G11</span></td></tr>
+<tr><td class="par">§2.4</td><td><div class="t">Testes de conformidade</div><div class="d">Resultados dos testes de conformidade em área pública.</div></td><td class="sit"><span class="pill no">Não tem</span> <span class="gref">G21</span></td></tr>
+<tr><td class="par">§2.5</td><td><div class="t">SLA do Diretório</div><div class="d">24×7; 95% de disponibilidade a cada 24 h e 99,5% a cada 3 meses; P95 ≤ 1.500 ms.</div></td><td class="sit"><span class="pill no">Sem limiar</span> <span class="gref">G11</span></td></tr>
+<tr><td class="par">§3.5</td><td><div class="t">SLA do Service Desk</div><div class="d">24×7; 95% a cada 24 h e 99,5% a cada 3 meses; P95 ≤ 1.500 ms.</div></td><td class="sit"><span class="pill no">Sem limiar</span> <span class="gref">G11</span></td></tr>
+<tr><td class="par">§5.1.1</td><td><div class="t">Acessibilidade e diversidade</div><div class="d">Todas as áreas do Portal no padrão WCAG, considerando diversidade regional e populacional.</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="gref">G7</span></td></tr>
+<tr><td class="par">§5.1.2</td><td><div class="t">Linguagem e atualização</div><div class="d">Linguagem adequada ao público; conteúdo claro, transparente e atualizado a tempo.</div></td><td class="sit"><span class="pill ok">Com ressalva</span> <span class="gref">G12</span></td></tr>
+<tr><td class="par">§5.1.3</td><td><div class="t">Segurança e LGPD</div><div class="d">Navegação segura e tratamento de dados conforme a LGPD.</div></td><td class="sit"><span class="pill part">Parcial</span> <span class="gref">G8</span></td></tr>
+<tr><td class="par">§5.3</td><td><div class="t">Área do Cidadão</div><div class="d">Dez conteúdos editoriais (o que é o Open Finance, FAQ, glossário, busca de instituições etc.). Não inclui o painel de indicadores.</div></td><td class="sit"><span class="pill dec">Fora do escopo</span></td></tr>
+<tr><td class="par">§5.5</td><td><div class="t">SLA do Portal</div><div class="d">24×7; 90% de disponibilidade a cada 24 h e 99,5% a cada 3 meses.</div></td><td class="sit"><span class="pill no">Sem produção</span> <span class="gref">G17</span></td></tr>
+<tr><td class="par">§6.1</td><td><div class="t">SLA do Sandbox</div><div class="d">95% das 8h às 20h em dias úteis; 80% nos demais horários.</div></td><td class="sit"><span class="pill no">Sem limiar</span></td></tr>
+      </tbody></table></div>
+  <p class="small">Fonte: análise regulatória do projeto (paof-architecture/docs/regulatory-analysis.md) e verificação técnica v2. O texto oficial das INs não foi relido nesta verificação. A IN BCB 637 (Manual de Experiência do Cliente) é a origem do critério de jornada do §2.6.1 e não aparece nos demais documentos do projeto.</p>
 </section>
 
 <section class="two">
