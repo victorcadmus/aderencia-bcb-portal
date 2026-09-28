@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aderência regulatória do Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F5F7FA; --surface:#FFFFFF; --ink:#18212E; --ink-2:#465163; --ink-3:#6A7485;
+  --line:#DCE1E8; --line-2:#EBEEF2; --accent:#1D4F91; --accent-soft:#E6EDF7;
+  --ok:#23704A; --ok-bg:#E3F2E9; --part:#8A5A00; --part-bg:#FBF0D9;
+  --no:#A83232; --no-bg:#F8E3E3; --dec:#4F5968; --dec-bg:#E9ECF0; --t615:#0E6B6B; --t615-bg:#DDF1F0; --t588:#6A3F99; --t588-bg:#EEE6F7;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111620; --surface:#18202C; --ink:#E7ECF3; --ink-2:#B3BDCB; --ink-3:#8C97A7;
+    --line:#2C3747; --line-2:#222B38; --accent:#8DB4EA; --accent-soft:#1E2D44;
+    --ok:#7ACB9C; --ok-bg:#16301F; --part:#E6B75C; --part-bg:#33280F;
+    --no:#F08F8F; --no-bg:#3A1C1C; --dec:#B3BDCB; --dec-bg:#262F3C; --t615:#6FD0CC; --t615-bg:#143231; --t588:#C7A6EE; --t588-bg:#2A2038;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111620; --surface:#18202C; --ink:#E7ECF3; --ink-2:#B3BDCB; --ink-3:#8C97A7;
+  --line:#2C3747; --line-2:#222B38; --accent:#8DB4EA; --accent-soft:#1E2D44;
+  --ok:#7ACB9C; --ok-bg:#16301F; --part:#E6B75C; --part-bg:#33280F;
+  --no:#F08F8F; --no-bg:#3A1C1C; --dec:#B3BDCB; --dec-bg:#262F3C; --t615:#6FD0CC; --t615-bg:#143231; --t588:#C7A6EE; --t588-bg:#2A2038;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6;padding-inline:16px;padding-block:40px 72px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;text-wrap:balance;margin:0;line-height:1.2}
+h1{font-size:clamp(28px,4.4vw,40px);letter-spacing:-.01em}
+h2{font-size:25px}
+h3{font-size:18.5px}
+p{margin:0}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--ink-2)}
+.small{font-size:13.5px;color:var(--ink-3)}
+code,.code{font-family:var(--mono);font-size:.86em}
+section{display:flex;flex-direction:column;gap:18px}
+.sec-head{display:flex;flex-direction:column;gap:6px;max-width:68ch}
+
+/* hero */
+header{display:flex;flex-direction:column;gap:14px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.lede{font-size:17.5px;color:var(--ink-2);max-width:66ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:var(--ink-3)}
+.meta b{color:var(--ink-2);font-weight:600}
+
+/* key messages */
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.key{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.key .tag{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.key.good .tag{color:var(--ok)} .key.bad .tag{color:var(--no)} .key.mid .tag{color:var(--part)}
+.key h3{font-size:18px}
+.key p{color:var(--ink-2);font-size:14.5px}
+.key.bad{border-color:var(--no);box-shadow:inset 0 0 0 1px var(--no)}
+@media (max-width:820px){.keys{grid-template-columns:1fr}}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap;line-height:1.6}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.ok{color:var(--ok);background:var(--ok-bg)} .part{color:var(--part);background:var(--part-bg)}
+.no{color:var(--no);background:var(--no-bg)} .dec{color:var(--dec);background:var(--dec-bg)}
+
+/* scoreboard */
+.board{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:18px}
+.stack{display:flex;height:34px;border-radius:5px;overflow:hidden;gap:2px}
+.stack span{display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;color:var(--ink-2)}
+.legend b{font-variant-numeric:tabular-nums;color:var(--ink)}
+.reqs{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+.req{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:baseline;padding:9px 0;border-top:1px solid var(--line-2)}
+.req .pill{min-width:98px;justify-content:flex-start}
+.req div{font-size:14.5px}
+.req small{display:block;color:var(--ink-3);font-size:13px;line-height:1.45;margin-top:2px}
+@media (max-width:720px){.reqs{grid-template-columns:1fr}}
+.note{font-size:13.5px;color:var(--ink-2);background:var(--accent-soft);border-radius:6px;padding:10px 14px}
+
+/* norm blocks */
+.norms{display:flex;flex-direction:column;gap:18px}
+.norm{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.norm-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.norm-head p{font-size:14px;color:var(--ink-3)}
+.cols{display:grid;grid-template-columns:repeat(4,1fr)}
+.col{padding:16px 18px;display:flex;flex-direction:column;gap:10px;border-right:1px solid var(--line-2)}
+.col:last-child{border-right:0}
+.col ul{margin:0;padding-left:17px;display:flex;flex-direction:column;gap:7px;font-size:14px;color:var(--ink-2)}
+.col li b{color:var(--ink);font-weight:600}
+@media (max-width:860px){.cols{grid-template-columns:1fr 1fr}.col:nth-child(2){border-right:0}.col:nth-child(-n+2){border-bottom:1px solid var(--line-2)}}
+@media (max-width:520px){.cols{grid-template-columns:1fr}.col{border-right:0;border-bottom:1px solid var(--line-2)}.col:last-child{border-bottom:0}}
+
+/* tables */
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:820px}
+th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line-2)}
+th{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);background:var(--bg);border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+td.id{font-family:var(--mono);font-size:13px;white-space:nowrap;color:var(--ink-2)}
+td .t{font-weight:600;color:var(--ink)}
+td .d{color:var(--ink-2);margin-top:2px}
+.prio-row td{background:var(--bg);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);padding-block:9px}
+.prio-row td span{font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-3);margin-left:8px}
+td.nm{white-space:nowrap}
+td.nm .it{display:block;font-size:12.5px;color:var(--ink-3);margin-top:4px;white-space:normal;min-width:150px}
+.in{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:4px;font-variant-numeric:tabular-nums}
+.in706{color:var(--accent);background:var(--accent-soft)}
+.in615{color:var(--t615);background:var(--t615-bg)}
+.in588{color:var(--t588);background:var(--t588-bg)}
+.normsum{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--ink-2);align-items:center}
+.qw{font-size:11.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:4px;margin-left:6px;white-space:nowrap}
+
+/* decisions */
+.decisions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dq{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.dq .q{font-weight:600}
+.dq p{font-size:14px;color:var(--ink-2)}
+.dq .src{font-size:12.5px;color:var(--ink-3);font-family:var(--mono)}
+@media (max-width:720px){.decisions{grid-template-columns:1fr}}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.plain ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;color:var(--ink-2);font-size:14.5px}
+.plain li b{color:var(--ink)}
+
+details{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+summary{cursor:pointer;padding:14px 18px;font-weight:600}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+details .tbl{border:0;border-top:1px solid var(--line);border-radius:0}
+footer{border-top:1px solid var(--line);padding-top:20px;font-size:13px;color:var(--ink-3);display:flex;flex-direction:column;gap:6px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Portal de Dados · Open Finance Brasil</span>
+  <h1>Aderência do Portal de Dados às normas do BCB</h1>
+  <p class="lede">O que o portal já atende, o que falta e o que precisa de decisão, frente às IN BCB 706, 615 e 588 e aos gaps BCB023 a BCB026.</p>
+  <div class="meta">
+    <span><b>Posição:</b> 28/09/2026</span>
+    <span><b>Base:</b> verificação técnica v2, conferida diretamente no código</span>
+    <span><b>Público:</b> gestão de produto</span>
+  </div>
+</header>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Em três pontos</span>
+    <h2>Onde estamos</h2>
+  </div>
+  <div class="keys">
+    <div class="key good">
+      <span class="tag">O que avançou</span>
+      <h3>A maior parte do painel exigido está construída</h3>
+      <p>O painel de indicadores da IN 706 (§4.1) e as réguas de desempenho e disponibilidade da IN 615 já existem no produto, com tela, filtro e comparação com o mínimo exigido.</p>
+    </div>
+    <div class="key bad">
+      <span class="tag">Maior risco</span>
+      <h3>Nada disso roda com dado real</h3>
+      <p>Hoje todos os indicadores vêm de dados simulados. Não há carga diária automática, ambiente de produção nem esteira de publicação. Enquanto isso não existir, nenhuma exigência está atendida em produção.</p>
+    </div>
+    <div class="key mid">
+      <span class="tag">O que falta no produto</span>
+      <h3>Lacunas poucas e conhecidas</h3>
+      <p>Exportar os dados da tela (BCB026), régua do Pix para Iniciação de Pagamentos, os itens monitorados do §2 da IN 706 (certificação, tickets, qualidade, jornada) e qualquer limiar da IN 588.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Placar · IN BCB 706 §4.1</span>
+    <h2>15 exigências do painel de indicadores (só IN 706 §4.1)</h2>
+    <p class="muted">Este placar cobre só o §4.1 da IN 706, que define o que o painel público de indicadores deve mostrar. Os §2 e §4.2 da IN 706, a IN 615 e a IN 588 estão na seção "Por norma", mais abaixo. "Entregue" quer dizer funcionalidade pronta, ainda alimentada por dados simulados.</p>
+  </div>
+  <div class="board">
+    <div class="stack" role="img" aria-label="5 entregues, 8 parciais, 1 não entregue, 1 fora por decisão">
+      <span class="ok" style="flex:5">5</span>
+      <span class="part" style="flex:8">8</span>
+      <span class="no" style="flex:1">1</span>
+      <span class="dec" style="flex:1">1</span>
+    </div>
+    <div class="legend">
+      <span><b>5</b> entregues</span><span><b>8</b> parciais</span><span><b>1</b> não entregue</span><span><b>1</b> fora por decisão</span>
+    </div>
+    <div class="reqs">
+      <div class="req"><span class="pill ok">Entregue</span><div>Chamadas por API e endpoint<small>Série diária nos 3 domínios, com filtro de família e endpoint.</small></div></div>
+      <div class="req"><span class="pill part">Parcial</span><div>Consentimentos ativos<small>Existe em Dados do Cliente; não existe para Iniciação de Pagamentos.</small></div></div>
+      <div class="req"><span class="pill ok">Entregue</span><div>Disponibilidade por endpoint<small>Por versão, com régua e janela longa de 90 dias.</small></div></div>
+      <div class="req"><span class="pill part">Parcial</span><div>Índice de performance mensal<small>A nota 0–10 é exibida, mas em base diária; a norma pede mensal.</small></div></div>
+      <div class="req"><span class="pill ok">Entregue</span><div>Sucesso e erros por código de status<small>Do banco à tela.</small></div></div>
+      <div class="req"><span class="pill part">Parcial</span><div>Visão consolidada com melhores e piores<small>Destaque só nas telas de resiliência; a abertura não mostra o valor mínimo.</small></div></div>
+      <div class="req"><span class="pill ok">Entregue</span><div>Conversão por etapa (funil)<small>Por produto, etapa, par e instituição isolada. Ressalva: por par, só o 1º recorte e 6 meses.</small></div></div>
+      <div class="req"><span class="pill part">Parcial</span><div>Ordenação, busca e seleção múltipla<small>Filtros múltiplos em tudo; ordenação e busca só nas 8 telas de ranking.</small></div></div>
+      <div class="req"><span class="pill ok">Entregue</span><div>Identificação nominal das instituições<small>Rankings com nome, incluindo quem ficou sem medida.</small></div></div>
+      <div class="req"><span class="pill part">Parcial</span><div>Recurso visual contra o mínimo<small>Marca os dias abaixo da régua, sem contar quantos.</small></div></div>
+      <div class="req"><span class="pill no">Não entregue</span><div>Pesquisa customizada e download<small>Pacotes mensais funcionam; exportar o que está na tela, com os filtros, não.</small></div></div>
+      <div class="req"><span class="pill part">Parcial</span><div>Busca que liste todas as instituições<small>Disponível em 8 telas; 17 telas ficam sem.</small></div></div>
+      <div class="req"><span class="pill dec">Por decisão</span><div>Semáforo de conformidade por instituição<small>Retirado por decisão de arquitetura (ADR-0030).</small></div></div>
+      <div class="req"><span class="pill part">Parcial</span><div>Métricas, unidades e definições<small>8 métricas sem inciso da norma confirmado; sem glossário.</small></div></div>
+      <div class="req"><span class="pill part">Parcial</span><div>Atualização diária<small>O dado é diário, mas não há disparo automático da carga.</small></div></div>
+    </div>
+    <div class="note"><b>O que mudou desde a verificação de 25/09.</b> Os totais continuam os mesmos, mas a composição mudou: o funil de conversão passou a entregue e a atualização diária caiu para parcial. Três itens dados como ausentes existem: ordenação nas 8 telas de ranking, funil por instituição isolada e filtro por endpoint no ranking de instituições. Um item dado como concluído não está: ainda restam campos do semáforo retirado nos contratos. E entraram quatro achados novos: dados simulados, falta de CI e RLS, botão "Baixar CSV" sem ação e nomes errados no funil.</div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Gaps do catálogo</span>
+    <h2>BCB023 a BCB026</h2>
+    <p class="muted">Dois resolvidos, um resolvido em parte e um aberto. São os únicos códigos BCB nos repositórios; não existem BCB001 a BCB022. A origem do catálogo (regulador ou interno) não está registrada.</p>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Gap</th><th>O que significava</th><th>Situação</th><th>O que ainda falta</th></tr></thead>
+      <tbody>
+        <tr><td class="id">BCB023</td><td>Sem dados de disponibilidade</td><td><span class="pill ok">Resolvido</span></td><td class="muted">Nada no escopo do gap.</td></tr>
+        <tr><td class="id">BCB024</td><td>Sem funil de conversão</td><td><span class="pill ok">Resolvido</span></td><td class="muted">Ampliar a série por par além do 1º recorte e dos 6 meses; incluir a taxa mínima de conversão.</td></tr>
+        <tr><td class="id">BCB025</td><td>Sem aferição contra o SLA</td><td><span class="pill part">Em parte</span></td><td class="muted">As réguas aparecem nas telas. O veredito "conforme / não conforme" foi retirado por decisão. A abertura ainda não mostra o valor mínimo.</td></tr>
+        <tr><td class="id">BCB026</td><td>Exportação quebrada</td><td><span class="pill no">Aberto</span></td><td class="muted">Exportar o que está na tela com os filtros. Hoje o botão "Baixar CSV" aparece em 7 telas e não faz nada.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Por norma</span>
+    <h2>O que tem e o que não tem</h2>
+  </div>
+  <div class="norms">
+
+    <div class="norm">
+      <div class="norm-head"><h3>IN BCB 706</h3><p>Painel público de indicadores e itens monitorados</p></div>
+      <div class="cols">
+        <div class="col"><span class="pill ok">Tem</span><ul>
+          <li>Chamadas, disponibilidade e erros por endpoint</li>
+          <li>Funil de conversão por produto, par e instituição</li>
+          <li>Rankings nominais por instituição</li>
+          <li>Reporte: 95% em até 8h e 99% em 7 dias, por instituição, família e período</li>
+          <li>Divulgação por instituição com histórico (§4.2), exceto desconformidades</li>
+        </ul></div>
+        <div class="col"><span class="pill part">Parcial</span><ul>
+          <li>Consentimentos: falta Iniciação de Pagamentos</li>
+          <li>Nota de performance diária, não mensal</li>
+          <li>Busca e ordenação só nos rankings</li>
+          <li>Definições das métricas e glossário</li>
+          <li>Taxa mínima de conversão (§2.6.2) sem o cálculo dos 80%</li>
+          <li>Base normativa: o texto público não cita a IN BCB 706 nem diz que o portal não trata desconformidades</li>
+          <li>Atualização diária sem automação</li>
+        </ul></div>
+        <div class="col"><span class="pill no">Não tem</span><ul>
+          <li><b>Exportação</b> do que está na tela</li>
+          <li><b>Certificação</b> (§2.2), <b>tickets</b> (§2.3), <b>qualidade de dados</b> (§2.5) e <b>jornada</b> (§2.6.1)</li>
+        </ul></div>
+        <div class="col"><span class="pill dec">Fora por decisão</span><ul>
+          <li>Divulgação de desconformidades (§4.2)</li>
+          <li>Semáforo por instituição</li>
+          <li>Limites de UNPAIRED e INCONSISTENT (§2.4)</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div class="norm">
+      <div class="norm-head"><h3>IN BCB 615</h3><p>Limiares de desempenho e disponibilidade das APIs</p></div>
+      <div class="cols">
+        <div class="col"><span class="pill ok">Tem</span><ul>
+          <li>Régua de tempo de resposta P95: 1.500 / 2.000 / 4.000 ms</li>
+          <li>Disponibilidade diária ≥ 95% e longa ≥ 99,5%</li>
+          <li>HTTP 529 abaixo de 0,5%</li>
+        </ul></div>
+        <div class="col"><span class="pill part">Parcial</span><ul>
+          <li>Régua P95 ligada a só 8 dos 20 endpoints</li>
+        </ul></div>
+        <div class="col"><span class="pill no">Não tem</span><ul>
+          <li><b>Régua do Pix</b> para Iniciação de Pagamentos; os endpoints de pagamento nem aparecem nas telas</li>
+          <li>Disponibilidade em janela de 1 minuto ≥ 95%</li>
+        </ul></div>
+        <div class="col"><span class="pill dec">Fora por decisão</span><ul>
+          <li>Aferição mensal com tolerância (90% dos dias) para desempenho e 529</li>
+        </ul>
+        <span class="pill dec">Não se aplica</span><ul>
+          <li>Timeout de 15 s (vale para as APIs das instituições)</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div class="norm">
+      <div class="norm-head"><h3>IN BCB 588</h3><p>Diretrizes do próprio Portal</p></div>
+      <div class="cols">
+        <div class="col"><span class="pill ok">Tem</span><ul>
+          <li>Sem cookies e sem analytics (LGPD)</li>
+          <li>Data de apuração nas telas construídas (as 5 de Portabilidade não têm dado)</li>
+        </ul></div>
+        <div class="col"><span class="pill part">Parcial</span><ul>
+          <li>Acessibilidade: teste automático em só 2 telas e um defeito conhecido nas telas de série</li>
+          <li>Segurança: proteções do navegador incompletas e sem controle de acesso por linha no banco</li>
+          <li>Diretório: retrato fixo de 03/08/2026, sem atualização</li>
+        </ul></div>
+        <div class="col"><span class="pill no">Não tem</span><ul>
+          <li><b>Nenhum limiar</b> da IN 588 cadastrado: 95%/90% em 24 h, 99,5% em 3 meses e P95 ≤ 1.500 ms para Diretório e Service Desk; 95%/80% para o Sandbox</li>
+          <li>Resultados de testes de conformidade em área pública</li>
+          <li>SLA 24×7 do portal (não há produção)</li>
+        </ul></div>
+        <div class="col"><span class="pill dec">Fora do escopo</span><ul>
+          <li>Área do Cidadão (sem área autenticada)</li>
+        </ul></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Gaps encontrados</span>
+    <h2>Proposta de prioridade</h2>
+    <p class="muted">A prioridade é uma sugestão para discussão. A coluna "Norma" indica a instrução e o item de origem de cada gap. A coluna "Depende de" separa o que o time resolve sozinho do que precisa de definição externa.</p>
+    <div class="normsum"><span><span class="in in706">IN 706</span> 15 gaps</span><span><span class="in in615">IN 615</span> 2 gaps</span><span><span class="in in588">IN 588</span> 5 gaps</span></div>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Gap</th><th>Norma</th><th>Impacto para o negócio</th><th>Depende de</th><th>Ref.</th></tr></thead>
+      <tbody>
+        <tr class="prio-row"><td colspan="5">Bloqueia ir a produção<span>sem isso, nenhuma exigência vale</span></td></tr>
+        <tr><td><div class="t">Dados reais e carga diária</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 · RF-RES-08 atualização diária</span></td><td class="d">Todos os números atuais são simulados. Falta ligar as fontes reais e automatizar a carga diária.</td><td>Time + acesso às fontes</td><td class="id">RF-RES-08</td></tr>
+        <tr><td><div class="t">Ambiente de produção e esteira de publicação</div></td><td class="nm"><span class="in in588">IN 588</span><span class="it">§5.5 · SLA 24×7 do Portal</span></td><td class="d">Não há onde publicar nem pipeline de CI em nenhum repositório. A documentação dá isso como entregue.</td><td>Decisão de hosting e infra</td><td class="id">G17</td></tr>
+        <tr><td><div class="t">Segurança do banco e do navegador</div></td><td class="nm"><span class="in in588">IN 588</span><span class="it">§5.1.3 · segurança e LGPD</span></td><td class="d">Sem controle de acesso por linha (RLS) no banco. As 6 tabelas de perfis e permissões (RBAC) existem, mas vazias. No navegador, a política de segurança aceita script embutido e faltam HSTS e Permissions-Policy.</td><td>Time</td><td class="id">G8</td></tr>
+
+        <tr class="prio-row"><td colspan="5">Exigência explícita ou risco de imagem</td></tr>
+        <tr><td><div class="t">Exportação dos dados da tela</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 · RF-EXP-01 a 03 · BCB026</span></td><td class="d">Exigência direta da IN 706 e único gap BCB aberto.</td><td>Time</td><td class="id">G1 · BCB026</td></tr>
+        <tr><td><div class="t">Botão "Baixar CSV" que não funciona <span class="qw">rápido</span></div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 · RF-EXP · BCB026</span></td><td class="d">Aparece em 7 telas públicas. Esconder até a exportação existir evita a impressão de defeito.</td><td>Time</td><td class="id">G1</td></tr>
+        <tr><td><div class="t">Nomes errados no funil de Dados do Cliente <span class="qw">rápido</span></div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 V · conversão por etapa</span></td><td class="d">O gráfico diz "Iniciador/Detentor" onde deveria dizer "Receptor/Transmissor". É informação incorreta ao público.</td><td>Time</td><td class="id">TelaFunil</td></tr>
+        <tr><td><div class="t">Régua do Pix para pagamentos</div></td><td class="nm"><span class="in in615">IN 615</span><span class="it">§5.4.2 · disponibilidade</span></td><td class="d">Os endpoints de Iniciação de Pagamentos usam a régua geral e hoje nem aparecem nas telas.</td><td>Time</td><td class="id">G9</td></tr>
+
+        <tr class="prio-row"><td colspan="5">Completar o que está parcial</td></tr>
+        <tr><td><div class="t">Busca e ordenação em todas as telas</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 · RF-VIEW-04/08</span></td><td class="d">Busca em 8 de 25 telas, e ela só destaca a linha, sem filtrar. A busca geral do cabeçalho está desativada. As tabelas de resiliência têm ordem fixa e os cabeçalhos não são ordenáveis.</td><td>Time</td><td class="id">G2 · G3</td></tr>
+        <tr><td><div class="t">Mínimo exigido e destaque na abertura</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 · RF-RES-01 e 04 · BCB025</span></td><td class="d">A abertura fala em "contra o mínimo exigido" sem mostrar o valor e não destaca melhores e piores. O gráfico comparativo marca os dias abaixo da régua, mas não conta quantos.</td><td>Time</td><td class="id">G4</td></tr>
+        <tr><td><div class="t">Glossário e definições</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 · RF-CHASSI-05</span></td><td class="d">Sem glossário; 8 métricas sem o inciso da norma confirmado; nota metodológica em 1 de 5 telas.</td><td>Time + regulatório</td><td class="id">G5 · G6</td></tr>
+        <tr><td><div class="t">Acessibilidade</div></td><td class="nm"><span class="in in588">IN 588</span><span class="it">§5.1.1 · WCAG</span></td><td class="d">Testes automáticos cobrem só 2 telas e não passam pelas 4 telas de resiliência. Há um defeito conhecido (#48) nas 3 telas de "Evolução de chamadas".</td><td>Time</td><td class="id">G7</td></tr>
+        <tr><td><div class="t">Régua P95 para todos os endpoints</div></td><td class="nm"><span class="in in615">IN 615</span><span class="it">§5.3.2 · tempo de resposta</span></td><td class="d">Faltam 12 de 20 endpoints (10 de Open Data e 2 de Pix). Nenhum endpoint tem a classe alta, média ou baixa definida, e o vínculo atual é um cenário local.</td><td>Time</td><td class="id">G10</td></tr>
+        <tr><td><div class="t">Consentimentos de pagamentos</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 IV · consentimentos</span></td><td class="d">Não existe o indicador de estoque (ativos e únicos) para Iniciação de Pagamentos. Em Dados do Cliente, "ativos" é diário e não separa PF/PJ; só "únicos" separa.</td><td>Time + dado</td><td class="id">G14</td></tr>
+        <tr><td><div class="t">Limites do funil por par</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 V · BCB024</span></td><td class="d">O funil por par e por instituição existe, mas a série por par cobre só o 1º recorte e uma janela de 6 meses.</td><td>Time</td><td class="id">G13</td></tr>
+        <tr><td><div class="t">Taxa mínima de conversão</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§2.6.2 · taxas de conversão</span></td><td class="d">Falta o limiar de 80% da média das 3 maiores (± 3 p.p.).</td><td>Time</td><td class="id">G16</td></tr>
+        <tr><td><div class="t">Portabilidade</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 · painel</span></td><td class="d">5 telas mostram "Esta visão ainda não está disponível".</td><td>Dado</td><td class="id">G12</td></tr>
+        <tr><td><div class="t">Restos do semáforo retirado</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.2 · divulgação</span></td><td class="d">Campos de julgamento ainda saem nos contratos e na API, contra a decisão tomada.</td><td>Time</td><td class="id">G18</td></tr>
+
+        <tr class="prio-row"><td colspan="5">Depende de definição externa</td></tr>
+        <tr><td><div class="t">Nota de performance mensal</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 · RF-IND-06</span></td><td class="d">Fórmula e periodicidade vêm da Estrutura de Governança. Existe código que calcula a nota no portal, sem uso, contra a regra de que o portal só exibe o que recebe.</td><td>Governança</td><td class="id">G15</td></tr>
+        <tr><td><div class="t">Certificação, tickets, qualidade e jornada</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§2.2, §2.3, §2.5, §2.6.1</span></td><td class="d">Nenhum código. Precisam de fonte de dado e definição de escopo.</td><td>Escopo + dado</td><td class="id">G19</td></tr>
+        <tr><td><div class="t">Testes de conformidade públicos</div></td><td class="nm"><span class="in in588">IN 588</span><span class="it">§2.4 · testes de conformidade</span></td><td class="d">O Diretório traz o status de certificação, mas o portal o descarta de propósito.</td><td>Escopo</td><td class="id">G21</td></tr>
+        <tr><td><div class="t">Diretório atualizado</div></td><td class="nm"><span class="in in588">IN 588</span><span class="it">§2.3, §2.5, §3.5 · Diretório</span></td><td class="d">Retrato fixo de 03/08/2026 (107 organizações), sem as réguas da IN 588. Das sondas dos 22 serviços: 5 pareadas, 10 sem acesso, 7 inexistentes e 8 fora da tela.</td><td>Integração</td><td class="id">G11</td></tr>
+        <tr><td><div class="t">Ranking com o endpoint como sujeito</div></td><td class="nm"><span class="in in706">IN 706</span><span class="it">§4.1 I · chamadas</span></td><td class="d">O ranking de instituições já filtra por endpoint. Um ranking de endpoints contraria decisão de arquitetura.</td><td>Decisão</td><td class="id">G20</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Para decidir</span>
+    <h2>Decisões que precisam de produto</h2>
+  </div>
+  <div class="decisions">
+    <div class="dq"><span class="q">Seguimos sem divulgar desconformidades por instituição?</span><p>A IN 706 §4.2 pede. Foi retirado por decisão; manter exige sustentar a decisão perante o regulador.</p><span class="src">ADR-0030</span></div>
+    <div class="dq"><span class="q">De onde vem o catálogo BCB023 a BCB026?</span><p>Não se sabe se é do regulador ou interno. Isso muda o peso de cada gap.</p><span class="src">requirements.md</span></div>
+    <div class="dq"><span class="q">Onde hospedar o front: AWS ou Vercel?</span><p>Sem essa decisão não há artefato de deploy nem ambiente de produção.</p><span class="src">DP-FE</span></div>
+    <div class="dq"><span class="q">Volume, retenção e recuperação de desastre</span><p>O repositório de infraestrutura está vazio.</p><span class="src">DP-04</span></div>
+    <div class="dq"><span class="q">Qual a licença dos arquivos publicados?</span><p>ODbL está proposta, mas um teste do próprio código a proíbe. O pacote sai como "Em definição".</p><span class="src">ADR-0029</span></div>
+    <div class="dq"><span class="q">Nota de performance diária ou mensal?</span><p>Hoje é diária; a norma pede mensal. Fórmula vem da Governança.</p><span class="src">RF-IND-06</span></div>
+    <div class="dq"><span class="q">O texto público deve citar a base normativa?</span><p>Hoje a tela retira de propósito o número "IN BCB 706", e a regra "o portal não faz gestão de desconformidade" só existe em comentário de código. Pesa se a transparência da regra (RF-RES-07) exigir a citação.</p><span class="src">RF-RES-07</span></div>
+    <div class="dq"><span class="q">21 ou 22 serviços na Infraestrutura compartilhada?</span><p>A dúvida está registrada no próprio cadastro.</p><span class="src">seed/035</span></div>
+    <div class="dq"><span class="q">Qual versão do Manual de APIs vale?</span><p>A versão "7.0" segue como pergunta aberta.</p><span class="src">seed/058</span></div>
+  </div>
+</section>
+
+<section class="two">
+  <div class="plain" style="display:flex;flex-direction:column;gap:12px">
+    <span class="eyebrow">Documentação</span>
+    <h3>O documento de requisitos não é fonte confiável hoje</h3>
+    <ul>
+      <li><b>Subestima o produto:</b> dá como "em construção" ou "não entregue" itens prontos (erros por código de status, nota de performance, funil por instituição, arquivo publicado).</li>
+      <li><b>Superestima em outros pontos:</b> dá CI (RNF-ENG) como entregue, e não há CI. Dá RF-CHASSI-04 como entregue, mas o ADR-0025 diz que ele existe só na documentação.</li>
+      <li><b>Requisitos sem definição:</b> RF-RES-03 é citado em 5 ADRs e não está definido no documento de requisitos. RF-IND-01 fala em "ranking por endpoint", contra a decisão do ADR-0017.</li>
+      <li><b>Branch de documentação em revisão:</b> 17 de 19 afirmações conferem. Três pontos precisam de ajuste (ADR-0016, 0017 e 0028). Recomendação: pedir mudanças antes de aprovar e atualizar também o documento de requisitos e a análise regulatória, que ela não toca.</li>
+      <li><b>Outros desvios:</b> o contrato da API diz que os arquivos publicados não existem, e existem. Cinco alterações recentes de banco não estão documentadas em nenhum lugar.</li>
+    </ul>
+  </div>
+  <div class="plain" style="display:flex;flex-direction:column;gap:12px">
+    <span class="eyebrow">Como ler este resumo</span>
+    <h3>Premissas e limites</h3>
+    <ul>
+      <li><b>"Entregue"</b> quer dizer funcionalidade pronta no código, alimentada hoje por dados simulados.</li>
+      <li>As exigências vêm da documentação do projeto; o texto oficial das INs não foi relido nesta verificação.</li>
+      <li>O banco não foi consultado; o estado foi reconstruído a partir dos scripts de carga.</li>
+      <li>Datas de vigência consideradas: IN 706 desde 29/01/2026 e IN 615 desde 06/05/2025.</li>
+      <li>Os códigos G1 a G21 remetem à verificação técnica v2, onde está a evidência de cada ponto.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <span>Fonte: Aderência do Portal de Dados às normas do BCB — verificação v2 (28/09/2026), sobre a verificação v1 (25/09/2026).</span>
+  <span>As ações que saem desta verificação estão no documento Plano de ação BCBs.</span>
+  <span>Repositórios verificados: paof-portal-api, paof-portal-ui, paof-portal-lib, paof-architecture (branch docs/adr-estado-no-codigo) e paof-infra.</span>
+</footer>
+
+</div>
+</body>
+</html>
